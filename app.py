@@ -9,8 +9,10 @@ import os
 app = Flask(__name__)
 
 # Set up Database Model
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///db/bellybutton.sqlite"
-app.config["SEND_FILE_MAX_AGE_DEFAULT"] = 0
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', '') or "sqlite:///db/bellybutton.sqlite"
+# app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///db/bellybutton.sqlite"
+# app.config["SEND_FILE_MAX_AGE_DEFAULT"] = 0
+# ^ This is to turn off caching on static files for development.. 
 db = SQLAlchemy(app)
 
 # reflect an existing database into a new model
